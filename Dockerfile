@@ -1,6 +1,7 @@
 FROM centos:centos7
 
 RUN rpm -ivh http://software.ligo.org/lscsoft/scientific/7/x86_64/production/lscsoft-production-config-1.3-1.el7.noarch.rpm
+RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum clean all
 RUN yum makecache
 
