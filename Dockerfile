@@ -46,9 +46,23 @@ RUN yum install -y python-devel which
 RUN pip install --upgrade pip setuptools
 
 # Install PyCBC dependencies
-RUN pip install lalsuite==6.48.1.dev20180717
 RUN pip install jupyter
 RUN pip install -r https://raw.githubusercontent.com/gwastro/pycbc/master/requirements.txt
+
+# set up environment
+ADD etc/profile.d/pycbc.sh /etc/profile.d/pycbc.sh
+ADD etc/profile.d/pycbc.csh /etc/profile.d/pycbc.csh
+
+# add singularity profiles
+COPY .singularity.d /.singularity.d
+RUN cd / && \
+    ln -s .singularity.d/actions/exec .exec && \
+    ln -s .singularity.d/actions/run .run && \
+    ln -s .singularity.d/actions/test .shell && \
+    ln -s .singularity.d/runscript singularity
+
+# Install LALSuite
+RUN pip install lalsuite==6.48.1.dev20180717
 
 # Install and configure PyCBC
 RUN pip install pycbc
