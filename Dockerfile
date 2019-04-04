@@ -41,11 +41,15 @@ RUN chmod go+rx /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64/*.so
 RUN chmod go+r /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64/intel-simplified-software-license.html
 RUN rm -f /tmp/composer_xe_2015.0.090.tar.gz
 
+# Install Python development tools
+RUN yum install -y python-devel which
+
 # Upgrade to latest python installers
 RUN pip install --upgrade pip setuptools
 
 # Install PyCBC dependencies
 RUN pip install lalsuite==6.48.1.dev20180717
+RUN pip install jupyter
 RUN pip install -r https://raw.githubusercontent.com/gwastro/pycbc/master/requirements.txt
 
 # Install and configure PyCBC
