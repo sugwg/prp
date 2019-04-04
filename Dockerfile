@@ -33,13 +33,11 @@ RUN yum install -y libmetaio libmetaio-devel libmetaio-utils
 RUN yum install -y hdf5 hdf5-devel
 
 # Install MKL
-ADD https://git.ligo.org/ligo-cbc/pycbc-software/raw/efd37637fbb568936dfb92bc7aa8a77359c9aa36/x86_64/composer_xe_2015.0.090/composer_xe_2015.0.090.tar.gz /tmp/composer_xe_2015.0.090.tar.gz
 RUN mkdir -p /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64
-RUN tar -C /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64 -zxvf /tmp/composer_xe_2015.0.090.tar.gz
-ADD https://software.intel.com/en-us/license/intel-simplified-software-license /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64/intel-simplified-software-license.html
+RUN curl https://git.ligo.org/ligo-cbc/pycbc-software/raw/efd37637fbb568936dfb92bc7aa8a77359c9aa36/x86_64/composer_xe_2015.0.090/composer_xe_2015.0.090.tar.gz /tmp/composer_xe_2015.0.090.tar.gz | tar -C /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64 -zxvf -
+RUN curl https://software.intel.com/en-us/license/intel-simplified-software-license > /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64/intel-simplified-software-license.html
 RUN chmod go+rx /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64/*.so
 RUN chmod go+r /opt/intel/composer_xe_2015.0.090/mkl/lib/intel64/intel-simplified-software-license.html
-RUN rm -f /tmp/composer_xe_2015.0.090.tar.gz
 
 # Install Python development tools
 RUN yum install -y python-devel which
