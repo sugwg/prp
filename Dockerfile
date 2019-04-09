@@ -70,4 +70,4 @@ RUN pip install schwimmbad
 RUN MPICC=/usr/lib64/openmpi/bin CFLAGS='-I /usr/include/openmpi-x86_64 -L /usr/lib64/openmpi/lib -lmpi' pip install --no-cache-dir mpi4py
 
 # Install a recent PyCBC
-RUN pip install git+git@github.com:gwastro/pycbc.git@f9ba24edd11561e8e5c6ff5f8ed3831007ae2b1c
+RUN pip install git+git://github.com/gwastro/pycbc.git@f9ba24edd11561e8e5c6ff5f8ed3831007ae2b1c#egg=PyCBC
