@@ -1,0 +1,14 @@
+universe = vanilla
+executable = hostname.sh
+output = test-osg-$ENV(HOSTNAME)-$(cluster).$(process).out
+error = test-osg-$ENV(HOSTNAME)-$(cluster).$(process).err
+log = test-osg-$ENV(HOSTNAME)-$(cluster).log
+arguments = hostname-osg-$ENV(HOSTNAME)-$(cluster).$(process).txt chris.dat
+should_transfer_files = Yes
+transfer_output_files = hostname-osg-$ENV(HOSTNAME)-$(cluster).$(process).txt
+transfer_input_files = chris.dat
++OpenScienceGrid = True
++ProjectName = "sugwg"
+requirements = (TARGET.Glidein_SITE isnt undefined) && (TARGET.Glidein_SITE is "SDSC-PRP")
+request_cpus = 8
+queue 10
